@@ -25,7 +25,7 @@ namespace MarsRoverTests
         [TestMethod]
         public void ConstructorSetsDefaultGeneratorWatts()
         {
-            Rover newRover = new Rover(0);
+            Rover newRover = new Rover(5);
             Assert.AreEqual(newRover.GeneratorWatts, 110);
         }
 
@@ -48,8 +48,8 @@ namespace MarsRoverTests
         [TestMethod]
         public void PositionChangesFromMoveCommand()
         {
-            Rover newRover = new Rover(98382, "NORMAL");
-            Assert.AreEqual(newRover.Position, 98382);
+            Rover newRover = new Rover(5000);
+            Assert.AreEqual(newRover.Position, 5000);
         }
         
     }   

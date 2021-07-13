@@ -21,7 +21,7 @@ namespace MarsRoverTests
             }
             catch (ArgumentNullException ex)
             {
-                Assert.AreEqual("Name is required.", ex.Message);
+                Assert.AreEqual("Message name is required.", ex.Message);
             }
 
         }
@@ -37,7 +37,7 @@ namespace MarsRoverTests
         public void ConstructorSetsCommandsField()
         {
             Message message2 = new Message("Rover", commands);
-            Assert.AreEqual(message2.Commands[0], commands[0]);
+            Assert.AreEqual(message2.Commands, commands);
         }
 
     }
