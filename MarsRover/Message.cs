@@ -17,7 +17,7 @@ namespace MarsRover
             this.Name = name;
             if (String.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("Name is required.", name);
+                throw new ArgumentNullException(name, "Name is required.");
             }
         
             this.Commands = commands;
