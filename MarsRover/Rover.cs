@@ -9,24 +9,24 @@ namespace MarsRover
 
         public Rover(int position)
         {
-            this.Position = position;
-            this.Mode = "Normal";
-            this.GeneratorWatts = 110;
+            Position = position;
+            Mode = "NORMAL";
+            GeneratorWatts = 110;
         }
         public Rover(int position, string mode_change)
         {
             Position = position;
-            Mode = "Normal";
+            Mode = "NORMAL";
             GeneratorWatts = 110;
             if (mode_change == "MODE_CHANGE")
             {
-                Mode = "Low Power";
+                Mode = "LOW_POWER";
                 GeneratorWatts = 0;
                 Position = 0;
             }
-            else if (mode_change != "MODE_CHANGE" || mode_change == "Normal")
+            else if (mode_change != "MODE_CHANGE" || mode_change == "NORMAL")
             {
-                Mode = "Enter commands: MODE_CHANGE or Normal";
+                Mode = "Enter commands: MODE_CHANGE or NORMAL";
                 GeneratorWatts = 0;
                 Position = position;
             }
@@ -34,12 +34,17 @@ namespace MarsRover
 
         public void ReceiveMessage(Message message)
         {
-            Command[] commands = { new Command("MOVE", 5000) };
-            Message newMessage = new Message("Test message with one command", commands);
-            Rover newRover = new Rover(98382);
-            Console.WriteLine(newRover.ToString());
-            newRover.ReceiveMessage(newMessage);
-            Console.WriteLine(newRover.ToString());
+            foreach (var command in message.Commands)
+            {
+                if (command.CommandType == "MODE CHANGE")
+                {
+                    Mode = command.NewMode;
+                }
+                else if (command.CommandType == "MOVE" && Mode != "LOW_POWER")
+                {
+                    Position = command.NewPostion;
+                }
+            }
         }
 
 

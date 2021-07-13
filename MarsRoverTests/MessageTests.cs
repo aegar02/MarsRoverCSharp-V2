@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace MarsRoverTests
 {
-    [TestClass]
+    [TestClass] 
     public class MessageTests
     {
 
         Command[] commands = { new Command("foo", 0), new Command("bar", 20) };
 
-        [TestMethod]
+        [TestMethod] //Test 5
 
         public void ArgumentNullExceptionThrownIfNameNotPassedToConstructor()
         {
@@ -26,17 +26,17 @@ namespace MarsRoverTests
 
         }
 
-        [TestMethod]
+        [TestMethod] //Test 6
         public void ConstructorSetsName()
         {
-            Message message1 = new Message("Rover", commands);
-            Assert.AreEqual(message1.Name, "Rover");
+            Message message1 = new Message("Name", commands);
+            Assert.AreEqual(message1.Name, "Name");
         }
 
-        [TestMethod]
+        [TestMethod] //Test 7
         public void ConstructorSetsCommandsField()
         {
-            Message message2 = new Message("Rover", commands);
+            Message message2 = new Message("Name", commands);
             Assert.AreEqual(message2.Commands, commands);
         }
 

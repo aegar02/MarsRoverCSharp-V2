@@ -8,46 +8,53 @@ namespace MarsRoverTests
     [TestClass]
     public class RoverTests
     {
-        [TestMethod]
+        [TestMethod] //Test 8
         public void ConstructorSetsDefaultPosition()
         {
             Rover newRover = new Rover(5);
             Assert.AreEqual(newRover.Position, 5);
         }
 
-        [TestMethod]
+        [TestMethod] //Test 9
         public void ConstructorSetsDefaultMode()
         {
             Rover newRover = new Rover(5);
-            Assert.AreEqual(newRover.Mode, "Normal");
+            Assert.AreEqual(newRover.Mode, "NORMAL");
         }
 
-        [TestMethod]
+        [TestMethod] //Test 10
         public void ConstructorSetsDefaultGeneratorWatts()
         {
             Rover newRover = new Rover(5);
-            Assert.AreEqual(newRover.GeneratorWatts, 110);
+            Assert.AreEqual(newRover.GeneratorWatts, 110, .001);
         }
 
-        [TestMethod]
+        [TestMethod] //Test 11
         public void RespondsCorrectlyToModeChangeCommand()
-        { 
+        {
+            Command[] commands = { new Command("MODE_CHANGE", "LOW_POWER") };
+            Message newMessage = new Message("Rover", commands);
             Rover newRover = new Rover(98382, "MODE_CHANGE");
-            Assert.AreEqual(newRover.Mode, "Low Power");
+            newRover.ReceiveMessage(newMessage);
+            Assert.AreEqual(newRover.Mode, "LOW_POWER");
    
         }
 
-        [TestMethod]
+        [TestMethod] //Test 12
         public void DoesNotMoveInLowPower()
         {
-            Rover newRover = new Rover(98382, "MODE_CHANGE");
+            Command[] commands = { new Command("MODE_CHANGE", "LOW_POWER") };
+            Message newMessage = new Message("Rover", commands);
+            Rover newRover = new Rover(0, "MODE_CHANGE");
             Assert.AreEqual(newRover.Position, 0);
 
         }
 
-        [TestMethod]
+        [TestMethod] //Test 13
         public void PositionChangesFromMoveCommand()
         {
+            Command[] commands = { new Command("MODE_CHANGE", "LOW_POWER") };
+            Message newMessage = new Message("Rover", commands);
             Rover newRover = new Rover(5000);
             Assert.AreEqual(newRover.Position, 5000);
         }
